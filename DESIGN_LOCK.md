@@ -1,16 +1,16 @@
 # AnalyzeMySite Design Lock
 
-Approved design is option 1 / first design:
+FINAL APPROVED DESIGN: current live design after commit `89b6c5c`.
 
-Crimson + black + white layout with AI orb and model badges:
-- ChatGPT
-- Claude
-- Gemini
-- Perplexity
-
-Base design restored from commit `a0d3346` with AnalyzeMySite branding.
+This is the only approved design:
+- Crimson / black / white theme
+- AI orb hero visual
+- ChatGPT / Claude / Gemini / Perplexity badges
+- Desktop layout matched to mobile-style single-column layout
+- AnalyzeMySite branding
 
 Rules:
-- Do not change the layout/theme/hero/design unless admin explicitly says "redesign".
-- Future changes must stay inside this exact design.
-- No uploaded hero image replacement unless explicitly requested.
+- Do not switch to any older design/version again.
+- Do not change overall layout, theme, hero structure, colors, or visual style unless admin explicitly says: "redesign".
+- Future work must stay inside this exact design.
+- Allowed without redesign: copy updates, small text changes, links, form behavior, bug fixes, deployment fixes, minor spacing fixes that do not change the visual direction.
