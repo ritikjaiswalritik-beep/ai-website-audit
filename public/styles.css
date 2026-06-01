@@ -438,3 +438,30 @@ input:focus { border-color: #e9a5b0; box-shadow: 0 0 0 4px #fff1f3; }
 @media (max-width: 640px) {
   .clean-image-wrap { min-height: 0 !important; }
 }
+/* Final fix: make PC use the same good mobile layout */
+.hero-split {
+  grid-template-columns: 1fr !important;
+  gap: 34px !important;
+  max-width: 900px;
+  margin: 0 auto;
+  min-height: auto;
+  padding: 54px 0 72px;
+}
+.hero-split h1,
+.hero-split .hero-copy {
+  max-width: 860px;
+}
+.clean-showcase,
+.hero-visual-card {
+  width: min(560px, 100%);
+  margin-left: auto;
+  margin-right: auto;
+}
+.analysis-console-split {
+  grid-template-columns: 1fr !important;
+}
+.analysis-model-card {
+  width: min(560px, 100%);
+  margin-left: auto;
+  margin-right: auto;
+}
