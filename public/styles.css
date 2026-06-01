@@ -288,3 +288,25 @@ footer { color: var(--muted); border-top: 1px solid var(--border); padding: 28px
   }
   .hero-visual-card { max-width: 460px; }
 }
+
+/* Hard placement fix: image must stay beside search area on PC/tablet */
+.hero-content { grid-area: copy; }
+.hero-visual-card { grid-area: visual; }
+@media (min-width: 700px) {
+  .hero-split {
+    display: grid;
+    grid-template-areas: "copy visual";
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 42%);
+    align-items: start;
+  }
+  .hero-content { grid-area: copy; }
+  .hero-visual-card {
+    grid-area: visual;
+    align-self: start;
+    justify-self: end;
+    margin-top: 0;
+  }
+}
+@media (max-width: 699px) {
+  .hero-split { grid-template-areas: "copy" "visual"; }
+}
