@@ -1,13 +1,13 @@
 # AnalyzeMySite Design Lock
 
-Approved visual direction is the crimson red + black layout restored from commit `a0d3346`, with AnalyzeMySite branding.
+Approved visual direction is exactly the website design restored in commit `62a26d1`:
+
+`62a26d1 - Restore previous homepage design`
 
 Rules for future changes:
 
-- Do not redesign the overall homepage layout unless explicitly requested.
-- Keep the crimson red, black, and white theme.
-- Keep the AI orb/model-badge hero visual stable.
-- Do not replace the hero with uploaded/generated images unless explicitly requested.
-- Future edits should only adjust content, small copy, links, forms, or bug fixes inside this approved design.
-- If a visual change is requested, make it as a small targeted edit, not a full theme/layout change.
+- Do not redesign the overall homepage layout unless explicitly requested with the word "redesign".
+- Keep this exact approved design, spacing, hero layout, colors, image placement, cards, and analysis page style.
 - Brand name remains: AnalyzeMySite.
+- Future edits should only be small content/copy/link/form/bug-fix changes inside this design.
+- Do not switch to another previous design unless the user explicitly asks for a specific commit/version.
