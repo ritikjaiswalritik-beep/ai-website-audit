@@ -97,7 +97,7 @@ leadForm.addEventListener('submit', async (event) => {
     });
     const data = await response.json();
     if (!response.ok) throw new Error(data.message || 'Something went wrong.');
-    formStatus.textContent = data.message;
+    formStatus.innerHTML = data.reportUrl ? `${data.message} <a href="${data.reportUrl}" target="_blank" rel="noopener">Open report</a>` : data.message;
     leadForm.reset();
   } catch (error) {
     formStatus.textContent = error.message || 'Unable to submit right now. Please try again.';

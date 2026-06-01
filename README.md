@@ -24,3 +24,9 @@ Open `http://localhost:3000`.
 ## Environment
 
 Copy `.env.example` to `.env` and configure SMTP for email notifications.
+
+## Report Link Flow
+
+When a visitor submits the form after the scan, AnalyzeMySite now creates a unique `/report/:id` result page and stores it under `data/reports/`. If SMTP is configured, the visitor receives an email with their report link, similar to a professional SEO analyzer flow.
+
+Set `PUBLIC_BASE_URL` to your live domain so email links use the correct website URL.
