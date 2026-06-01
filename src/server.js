@@ -13,6 +13,14 @@ const DATA_DIR = path.join(__dirname, '..', 'data');
 const REPORTS_DIR = path.join(DATA_DIR, 'reports');
 const LEADS_FILE = path.join(DATA_DIR, 'leads.jsonl');
 
+process.on('unhandledRejection', (error) => {
+  console.error('Unhandled rejection:', error);
+});
+
+process.on('uncaughtException', (error) => {
+  console.error('Uncaught exception:', error);
+});
+
 app.set('trust proxy', true);
 app.use(helmet({ contentSecurityPolicy: false }));
 app.use(express.json({ limit: '100kb' }));
@@ -124,17 +132,39 @@ async function analyzeWebsite(website) {
   if (!normalized) throw new Error('Enter a valid website URL, like example.com.');
   await assertPublicWebsite(normalized);
 
-  const startedAt = Date.now();
-  const response = await fetchWithTimeout(normalized, {
-    redirect: 'follow',
-    headers: {
-      'user-agent': 'AnalyzeMySiteBot/1.0 (+https://analyzemysite.local)',
-      accept: 'text/html,application/xhtml+xml'
+  const candidates = [normalized];
+  const parsedInput = new URL(normalized);
+  if (parsedInput.protocol === 'https:') {
+    const httpFallback = new URL(normalized);
+    httpFallback.protocol = 'http:';
+    candidates.push(httpFallback.toString());
+  }
+
+  let response;
+  let loadMs = 0;
+  let lastError;
+  for (const candidate of candidates) {
+    try {
+      await assertPublicWebsite(candidate);
+      const startedAt = Date.now();
+      response = await fetchWithTimeout(candidate, {
+        redirect: 'follow',
+        headers: {
+          'user-agent': 'AnalyzeMySiteBot/1.0 (+https://analyzemysite.local)',
+          accept: 'text/html,application/xhtml+xml'
+        }
+      });
+      loadMs = Date.now() - startedAt;
+      if (response.ok) break;
+      lastError = new Error(`Website returned HTTP ${response.status}.`);
+    } catch (error) {
+      lastError = error;
+      response = null;
     }
-  });
-  const loadMs = Date.now() - startedAt;
+  }
+
+  if (!response || !response.ok) throw new Error(lastError?.message || 'Unable to open this website right now.');
   const contentType = response.headers.get('content-type') || '';
-  if (!response.ok) throw new Error(`Website returned HTTP ${response.status}. Please check the URL.`);
   if (!contentType.includes('text/html') && !contentType.includes('application/xhtml')) {
     throw new Error('That URL does not look like a public website page.');
   }
@@ -517,7 +547,16 @@ app.get('/report/:id', async (req, res) => {
   }
 });
 
-app.get('/health', (_req, res) => res.json({ ok: true }));
+app.get('/health', (_req, res) => res.json({ ok: true, service: 'AnalyzeMySite' }));
+
+app.use((req, res) => {
+  res.status(404).type('html').send('<!doctype html><title>Not found</title><p>Page not found. <a href="/">Go home</a></p>');
+});
+
+app.use((error, _req, res, _next) => {
+  console.error('Request error:', error);
+  res.status(500).json({ ok: false, message: 'Something went wrong. Please try again.' });
+});
 
 app.listen(PORT, () => {
   console.log(`AnalyzeMySite running on port ${PORT}`);
