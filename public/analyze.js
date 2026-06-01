@@ -15,7 +15,8 @@ const formStatus = document.getElementById('formStatus');
 
 function safeUrl(value) {
   try {
-    const url = new URL(value);
+    const withProtocol = /^https?:\/\//i.test(value) ? value : `https://${value}`;
+    const url = new URL(withProtocol);
     if (!['http:', 'https:'].includes(url.protocol)) return '';
     return url.toString();
   } catch {
@@ -29,15 +30,13 @@ targetUrl.textContent = cleanWebsite;
 leadWebsite.value = cleanWebsite;
 
 const steps = [
-  ['Analyzing your website…', 'We are checking what visitors see first — and what might stop them from trusting you.'],
-  ['Checking Google visibility…', 'Your pages may be missing signals that help Google understand and rank your business.'],
-  ['Scanning AI search readiness…', 'We are checking if ChatGPT, Gemini, and AI answers can clearly understand what you offer.'],
-  ['Finding hidden traffic gaps…', 'Some pages can look fine but still fail to bring the right visitors. We are looking for those gaps.'],
-  ['Reviewing your content structure…', 'If your content is not easy for AI and search engines to read, competitors can win the attention first.'],
-  ['Checking mobile experience…', 'Most people decide fast on mobile. We are checking if your site feels clear, fast, and easy to act on.'],
-  ['Looking for lead leaks…', 'We are finding weak calls-to-action, missing trust points, and places where visitors may drop off.'],
-  ['Comparing growth signals…', 'We are checking the signals that stronger websites use to get more traffic, clicks, and enquiries.'],
-  ['Building your fix list…', 'The report will show the most important improvements first, so you know exactly what to work on.'],
+  ['Validating the website…', 'We are checking if this is a real public website we can safely scan.'],
+  ['Reading live page data…', 'We are pulling the actual title, description, headings, links, images, and page structure.'],
+  ['Checking Google visibility…', 'We are scoring SEO signals like title, meta description, headings, sitemap, and index-friendly structure.'],
+  ['Scanning AI search readiness…', 'We are checking schema, clear answers, trust signals, and content structure for 2026 AI discovery.'],
+  ['Measuring speed signals…', 'We are checking response time, page size, scripts, and mobile-friendly basics.'],
+  ['Looking for lead leaks…', 'We are finding weak calls-to-action, missing trust points, and contact-flow gaps.'],
+  ['Building real scores…', 'Your score is being calculated from visible checks, not random numbers.'],
   ['Preparing your results…', 'Almost done — your website growth report is being prepared with simple next steps.']
 ];
 
@@ -49,13 +48,46 @@ function addFeed(text) {
   while (liveFeed.children.length > 5) liveFeed.lastElementChild.remove();
 }
 
+function addAnalysisFeed(analysis) {
+  addFeed(`Real score calculated: ${analysis.scores.overall}/100 overall.`);
+  addFeed(`Detected ${analysis.metrics.wordCount} words, ${analysis.metrics.h2Count} subheadings, and ${analysis.metrics.linkCount} links.`);
+  if (analysis.issues?.[0]) addFeed(`Top issue: ${analysis.issues[0]}.`);
+}
+
 let progress = 0;
 let index = 0;
-addFeed('Scan started. We are finding what your website may be missing.');
+let analysisReady = false;
+let progressDone = false;
+let analysisError = '';
+addFeed('Live scan started. We are checking the actual website now.');
+
+const analysisRequest = fetch(`/api/analyze?website=${encodeURIComponent(cleanWebsite)}`)
+  .then(async (response) => {
+    const data = await response.json();
+    if (!response.ok || !data.ok) throw new Error(data.message || 'Unable to analyze this website.');
+    analysisReady = true;
+    addAnalysisFeed(data.analysis);
+    return data.analysis;
+  })
+  .catch((error) => {
+    analysisError = error.message || 'Unable to analyze this website.';
+    modelName.textContent = 'Website scan needs attention';
+    scanMessage.textContent = analysisError;
+    addFeed(analysisError);
+    return null;
+  });
+
+function maybeOpenLeadForm() {
+  if (analysisError) return;
+  if (progressDone && analysisReady) {
+    setTimeout(() => leadModal.classList.remove('hidden'), 700);
+  }
+}
 
 const timer = setInterval(() => {
-  progress += Math.floor(Math.random() * 4) + 2;
-  if (progress > 100) progress = 100;
+  progress += Math.floor(Math.random() * 5) + 4;
+  if (progress > 98 && !analysisReady && !analysisError) progress = 98;
+  if (progress > 100 || analysisReady) progress = 100;
 
   const nextIndex = Math.min(steps.length - 1, Math.floor((progress / 100) * steps.length));
   if (nextIndex !== index || progress === 100) {
@@ -73,11 +105,14 @@ const timer = setInterval(() => {
   progressBar.style.width = `${progress}%`;
   progressNumber.textContent = `${progress}%`;
 
-  if (progress >= 100) {
+  if (progress >= 100 || analysisError) {
     clearInterval(timer);
-    setTimeout(() => leadModal.classList.remove('hidden'), 900);
+    progressDone = true;
+    maybeOpenLeadForm();
   }
-}, 1600);
+}, 1300);
+
+analysisRequest.then(() => maybeOpenLeadForm());
 
 closeModal.addEventListener('click', () => leadModal.classList.add('hidden'));
 leadModal.addEventListener('click', (event) => {
@@ -86,7 +121,7 @@ leadModal.addEventListener('click', (event) => {
 
 leadForm.addEventListener('submit', async (event) => {
   event.preventDefault();
-  formStatus.textContent = 'Preparing your report request…';
+  formStatus.textContent = 'Preparing your real report request…';
   const payload = Object.fromEntries(new FormData(leadForm).entries());
 
   try {
