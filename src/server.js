@@ -318,6 +318,48 @@ async function saveReport(report) {
   await fs.writeFile(path.join(REPORTS_DIR, `${report.id}.json`), JSON.stringify(report, null, 2), 'utf8');
 }
 
+function reportSecret() {
+  return process.env.REPORT_SECRET || 'analyzemysite-durable-report-v1';
+}
+
+function compactReport(report) {
+  const analysis = report.analysis || {};
+  return {
+    v: 1,
+    id: report.id,
+    website: report.website,
+    name: report.name,
+    business: report.business,
+    createdAt: report.createdAt,
+    expiresAt: report.expiresAt,
+    scores: report.scores,
+    grades: report.grades,
+    fixes: report.fixes,
+    analysis: {
+      finalUrl: analysis.finalUrl,
+      loadMs: analysis.loadMs,
+      pageKb: analysis.pageKb,
+      metrics: analysis.metrics,
+      issues: analysis.issues,
+      wins: analysis.wins
+    }
+  };
+}
+
+function createReportToken(report) {
+  const payload = Buffer.from(JSON.stringify(compactReport(report))).toString('base64url');
+  const sig = crypto.createHmac('sha256', reportSecret()).update(payload).digest('base64url').slice(0, 32);
+  return `${payload}.${sig}`;
+}
+
+function readReportToken(token) {
+  const [payload, sig] = String(token || '').split('.');
+  if (!payload || !sig) return null;
+  const expected = crypto.createHmac('sha256', reportSecret()).update(payload).digest('base64url').slice(0, 32);
+  if (!crypto.timingSafeEqual(Buffer.from(sig), Buffer.from(expected))) return null;
+  return JSON.parse(Buffer.from(payload, 'base64url').toString('utf8'));
+}
+
 function getTransporter() {
   const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS } = process.env;
   if (!SMTP_HOST || !SMTP_USER || !SMTP_PASS) return null;
@@ -504,7 +546,8 @@ app.post('/api/leads', async (req, res) => {
   } catch (error) {
     return res.status(400).json({ ok: false, message: error.message || 'Unable to analyze this website.' });
   }
-  const reportUrl = `${publicBaseUrl(req)}/report/${report.id}`;
+  const reportToken = createReportToken(report);
+  const reportUrl = `${publicBaseUrl(req)}/report/${reportToken}`;
 
   const lead = {
     website: report.website,
@@ -513,6 +556,7 @@ app.post('/api/leads', async (req, res) => {
     phone,
     business,
     reportId: report.id,
+    reportToken,
     reportUrl,
     createdAt: report.createdAt,
     scores: report.scores,
@@ -521,7 +565,11 @@ app.post('/api/leads', async (req, res) => {
   };
 
   await fs.mkdir(DATA_DIR, { recursive: true });
-  await saveReport(report);
+  try {
+    await saveReport(report);
+  } catch (error) {
+    console.error('Report file save failed, signed link will still work:', error.message);
+  }
   await fs.appendFile(LEADS_FILE, JSON.stringify(lead) + '\n', 'utf8');
 
   try {
@@ -533,18 +581,32 @@ app.post('/api/leads', async (req, res) => {
   res.json({ ok: true, reportUrl, scores: report.scores, message: 'Your real website report is ready. Check your email, or open the report link shown here.' });
 });
 
-app.get('/report/:id', async (req, res) => {
-  const id = String(req.params.id || '').replace(/[^a-f0-9]/g, '');
-  if (id.length !== 32) return res.status(404).send('Report not found');
+app.get('/report/:token', async (req, res) => {
+  const token = String(req.params.token || '');
 
   try {
-    const raw = await fs.readFile(path.join(REPORTS_DIR, `${id}.json`), 'utf8');
-    const report = JSON.parse(raw);
-    if (Date.parse(report.expiresAt) < Date.now()) return res.status(410).send('This report link has expired.');
-    res.type('html').send(renderReport(report));
-  } catch {
-    res.status(404).send('Report not found');
+    const reportFromToken = readReportToken(token);
+    if (reportFromToken) {
+      if (Date.parse(reportFromToken.expiresAt) < Date.now()) return res.status(410).send('This report link has expired.');
+      return res.type('html').send(renderReport(reportFromToken));
+    }
+  } catch (error) {
+    console.error('Signed report token failed:', error.message);
   }
+
+  const legacyId = token.replace(/[^a-f0-9]/g, '');
+  if (legacyId.length === 32) {
+    try {
+      const raw = await fs.readFile(path.join(REPORTS_DIR, `${legacyId}.json`), 'utf8');
+      const report = JSON.parse(raw);
+      if (Date.parse(report.expiresAt) < Date.now()) return res.status(410).send('This report link has expired.');
+      return res.type('html').send(renderReport(report));
+    } catch {
+      return res.status(404).type('html').send('<!doctype html><title>Report unavailable</title><p>This old report link is not available anymore. Please run a new scan to generate a durable report link.</p><p><a href="/">Run a new scan</a></p>');
+    }
+  }
+
+  res.status(404).type('html').send('<!doctype html><title>Report not found</title><p>Report not found. Please check the link or run a new scan.</p><p><a href="/">Run a new scan</a></p>');
 });
 
 app.get('/health', (_req, res) => res.json({ ok: true, service: 'AnalyzeMySite' }));
