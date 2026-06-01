@@ -1,16 +1,16 @@
 # AnalyzeMySite Design Lock
 
-FINAL APPROVED DESIGN: current live design after commit `89b6c5c`.
+FINAL APPROVED DESIGN:
+- Homepage/front page uses the uploaded AI image hero card design.
+- Analyze/loading page can keep its analysis visual separately.
+- Crimson / black / white theme.
+- AnalyzeMySite branding.
 
-This is the only approved design:
-- Crimson / black / white theme
-- AI orb hero visual
-- ChatGPT / Claude / Gemini / Perplexity badges
-- Desktop layout matched to mobile-style single-column layout
-- AnalyzeMySite branding
+Important clarification from admin:
+- The front page image/design was fine.
+- The confusion/problem was about the orb/visual on the Analyze Website page, not the homepage.
 
 Rules:
-- Do not switch to any older design/version again.
-- Do not change overall layout, theme, hero structure, colors, or visual style unless admin explicitly says: "redesign".
-- Future work must stay inside this exact design.
-- Allowed without redesign: copy updates, small text changes, links, form behavior, bug fixes, deployment fixes, minor spacing fixes that do not change the visual direction.
+- Do not remove or replace the homepage image design unless admin explicitly says so.
+- Do not switch to old homepage orb-only design unless admin explicitly says "redesign" or asks for that exact version.
+- Future changes must stay inside this exact design.
