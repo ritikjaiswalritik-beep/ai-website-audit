@@ -257,3 +257,34 @@ footer { color: var(--muted); border-top: 1px solid var(--border); padding: 28px
   .hero-split { grid-template-columns: minmax(0, 1.08fr) minmax(400px, 480px); gap: 56px; }
   .homepage-image-wrap { aspect-ratio: 1 / .95; }
 }
+
+/* Final PC/tablet placement fix: keep homepage image beside content, not dropped below */
+@media (min-width: 780px) {
+  .page-shell { width: min(1180px, calc(100% - 40px)); }
+  .hero-split {
+    max-width: 1180px;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 430px);
+    align-items: start;
+    gap: clamp(28px, 4vw, 56px);
+    padding: 46px 0 64px;
+  }
+  .hero-content { padding-top: 18px; }
+  .hero-split h1 { font-size: clamp(44px, 5vw, 66px); }
+  .hero-visual-card {
+    width: 100%;
+    max-width: 430px;
+    justify-self: end;
+    align-self: start;
+    margin: 0;
+  }
+  .homepage-image-wrap {
+    aspect-ratio: 1 / 1;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-split {
+    grid-template-columns: minmax(0, 1.08fr) minmax(380px, 460px);
+  }
+  .hero-visual-card { max-width: 460px; }
+}
