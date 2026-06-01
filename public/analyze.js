@@ -29,16 +29,16 @@ targetUrl.textContent = cleanWebsite;
 leadWebsite.value = cleanWebsite;
 
 const steps = [
-  ['GPT-style reasoning layer', 'Reading your website like a buyer and finding unclear messaging that can reduce trust.'],
-  ['Claude-style clarity review', 'Checking if your offer, sections, and copy are simple enough for visitors to understand fast.'],
-  ['Gemini-style discovery scan', 'Looking for SEO opportunities, missing page signals, and modern search visibility gaps.'],
-  ['Perplexity-style citation check', 'Testing if your content looks credible enough to be quoted by AI answer engines.'],
-  ['ChatGPT 2026 intent mapping', 'Matching your website pages with user search intent and lead-generation potential.'],
-  ['AI Overview readiness', 'Checking headings, snippets, and answer-friendly content structure.'],
-  ['GEO / AEO visibility engine', 'Reviewing if AI search systems can extract your expertise, services, and location clearly.'],
-  ['Mobile buyer journey analysis', 'Finding friction points that can make phone users leave before contacting you.'],
-  ['Conversion leak detector', 'Reviewing CTAs, trust signals, contact flow, and report-worthy growth blockers.'],
-  ['Final growth report builder', 'Prioritizing the most valuable fixes for traffic, leads, and AI visibility.']
+  ['Analyzing your website…', 'We are checking what visitors see first — and what might stop them from trusting you.'],
+  ['Checking Google visibility…', 'Your pages may be missing signals that help Google understand and rank your business.'],
+  ['Scanning AI search readiness…', 'We are checking if ChatGPT, Gemini, and AI answers can clearly understand what you offer.'],
+  ['Finding hidden traffic gaps…', 'Some pages can look fine but still fail to bring the right visitors. We are looking for those gaps.'],
+  ['Reviewing your content structure…', 'If your content is not easy for AI and search engines to read, competitors can win the attention first.'],
+  ['Checking mobile experience…', 'Most people decide fast on mobile. We are checking if your site feels clear, fast, and easy to act on.'],
+  ['Looking for lead leaks…', 'We are finding weak calls-to-action, missing trust points, and places where visitors may drop off.'],
+  ['Comparing growth signals…', 'We are checking the signals that stronger websites use to get more traffic, clicks, and enquiries.'],
+  ['Building your fix list…', 'The report will show the most important improvements first, so you know exactly what to work on.'],
+  ['Preparing your results…', 'Almost done — your website growth report is being prepared with simple next steps.']
 ];
 
 function addFeed(text) {
@@ -51,7 +51,7 @@ function addFeed(text) {
 
 let progress = 0;
 let index = 0;
-addFeed('Secure scan session created. No website changes will be made.');
+addFeed('Scan started. We are finding what your website may be missing.');
 
 const timer = setInterval(() => {
   progress += Math.floor(Math.random() * 4) + 2;
@@ -86,7 +86,7 @@ leadModal.addEventListener('click', (event) => {
 
 leadForm.addEventListener('submit', async (event) => {
   event.preventDefault();
-  formStatus.textContent = 'Sending your report request…';
+  formStatus.textContent = 'Preparing your report request…';
   const payload = Object.fromEntries(new FormData(leadForm).entries());
 
   try {
