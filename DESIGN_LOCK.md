@@ -1,12 +1,16 @@
 # AnalyzeMySite Design Lock
 
-Approved design is option 2:
+Approved design is option 1 / first design:
 
-Crimson/black/white layout with uploaded AI image in the hero card.
+Crimson + black + white layout with AI orb and model badges:
+- ChatGPT
+- Claude
+- Gemini
+- Perplexity
 
-Base design restored from commit `62a26d1` with AnalyzeMySite branding.
+Base design restored from commit `a0d3346` with AnalyzeMySite branding.
 
 Rules:
 - Do not change the layout/theme/hero/design unless admin explicitly says "redesign".
 - Future changes must stay inside this exact design.
-- Brand name remains: AnalyzeMySite.
+- No uploaded hero image replacement unless explicitly requested.
