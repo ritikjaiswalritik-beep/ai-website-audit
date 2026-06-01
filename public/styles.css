@@ -311,3 +311,28 @@ input:focus { border-color: #e9a5b0; box-shadow: 0 0 0 4px #fff1f3; }
   .badge-gemini { left: 0; bottom: 24px; }
   .badge-perplexity { right: -16px; bottom: 100px; }
 }
+.hero-ai-image-wrap {
+  position: absolute;
+  inset: 28px;
+  z-index: 1;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: inset 0 0 0 1px rgba(234,221,224,.8);
+}
+.hero-ai-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.ai-model-showcase .main-panel,
+.ai-model-showcase .panel-one,
+.ai-model-showcase .panel-two,
+.ai-model-showcase .panel-three,
+.ai-model-showcase .model-badge {
+  background: rgba(255,255,255,.88);
+}
+@media (max-width: 640px) {
+  .hero-ai-image-wrap { inset: 18px; }
+}
