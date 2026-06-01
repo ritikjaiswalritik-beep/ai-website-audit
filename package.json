@@ -1,7 +1,7 @@
 {
-  "name": "ai-audit-website",
+  "name": "analyzemysite",
   "version": "1.0.0",
-  "description": "Minimal professional AI website audit lead-generation site for Node.js hosting.",
+  "description": "Professional AI website analysis lead-generation site for Node.js hosting.",
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",

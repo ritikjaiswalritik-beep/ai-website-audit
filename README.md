@@ -1,4 +1,4 @@
-# AI Website Audit
+# AnalyzeMySite
 
 Minimal professional Node.js lead-generation website inspired by modern audit tools.
 

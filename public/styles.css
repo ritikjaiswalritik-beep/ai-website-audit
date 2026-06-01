@@ -417,3 +417,38 @@ input:focus { border-color: #e9a5b0; box-shadow: 0 0 0 4px #fff1f3; }
   .model-chip-row { grid-template-columns: repeat(2, 1fr); }
   .hero-audit-card { grid-template-columns: 1fr; }
 }
+/* Professional AnalyzeMySite logo polish */
+.brand { letter-spacing: -0.04em; font-size: 17px; }
+.brand-mark {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  position: relative;
+  font-size: 0;
+  background: linear-gradient(135deg, #0a0a0a 0%, #0a0a0a 55%, var(--accent) 55%, var(--accent) 100%);
+  box-shadow: 0 12px 30px rgba(10,10,10,.14);
+}
+.brand-mark::before {
+  content: 'A';
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-size: 17px;
+  font-weight: 900;
+  letter-spacing: -.08em;
+}
+.brand-mark::after {
+  content: '';
+  position: absolute;
+  right: 7px;
+  bottom: 7px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 2px rgba(255,255,255,.22);
+}
+.nav-cta { font-weight: 800; }
+footer p { font-weight: 600; }
