@@ -311,3 +311,28 @@ input:focus { border-color: #e9a5b0; box-shadow: 0 0 0 4px #fff1f3; }
   .badge-gemini { left: 0; bottom: 24px; }
   .badge-perplexity { right: -16px; bottom: 100px; }
 }
+/* Lock desktop to the same approved mobile-style layout */
+.hero-split {
+  grid-template-columns: 1fr !important;
+  gap: 34px;
+  max-width: 900px;
+  margin: 0 auto;
+  min-height: auto;
+  padding: 54px 0 72px;
+}
+.hero-split .hero-copy,
+.hero-split h1 {
+  max-width: 860px;
+}
+.hero-visual-card {
+  width: min(560px, 100%);
+  min-height: 460px;
+  margin: 0 auto;
+}
+.analysis-console-split {
+  grid-template-columns: 1fr !important;
+}
+.analysis-model-card {
+  width: min(560px, 100%);
+  margin: 0 auto;
+}
