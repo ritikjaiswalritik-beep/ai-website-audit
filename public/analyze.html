@@ -27,27 +27,39 @@
         <p class="target-url" id="targetUrl">Preparing website…</p>
       </section>
 
-      <section class="analysis-console" aria-live="polite">
-        <div class="console-top">
-          <div>
-            <p class="small-label">Deep scan running</p>
-            <h2 id="modelName">Initializing AI model checks</h2>
+      <section class="analysis-console analysis-console-split" aria-live="polite">
+        <div class="analysis-left">
+          <div class="console-top">
+            <div>
+              <p class="small-label">Deep scan running</p>
+              <h2 id="modelName">Initializing AI model checks</h2>
+            </div>
+            <strong id="progressNumber">0%</strong>
           </div>
-          <strong id="progressNumber">0%</strong>
+
+          <div class="progress-track analysis-progress"><div class="progress-bar" id="progressBar"></div></div>
+          <p class="scan-message big" id="scanMessage">Starting professional website intelligence scan…</p>
+
+          <div class="model-strip" id="modelStrip">
+            <span class="active">GPT-style reasoning</span>
+            <span>Claude-style clarity</span>
+            <span>Gemini-style discovery</span>
+            <span>Perplexity-style citations</span>
+            <span>2026 GEO/AEO signals</span>
+          </div>
+
+          <div class="live-feed" id="liveFeed"></div>
         </div>
 
-        <div class="progress-track analysis-progress"><div class="progress-bar" id="progressBar"></div></div>
-        <p class="scan-message big" id="scanMessage">Starting professional website intelligence scan…</p>
-
-        <div class="model-strip" id="modelStrip">
-          <span class="active">GPT-style reasoning</span>
-          <span>Claude-style clarity</span>
-          <span>Gemini-style discovery</span>
-          <span>Perplexity-style citations</span>
-          <span>2026 GEO/AEO signals</span>
+        <div class="analysis-model-card" aria-label="AI model analysis visual">
+          <div class="model-photo">
+            <div class="model-face"></div>
+            <div class="model-shirt"></div>
+          </div>
+          <div class="scan-overlay overlay-a"><strong>AI Search</strong><span><i style="width:72%"></i></span></div>
+          <div class="scan-overlay overlay-b"><strong>SEO</strong><span><i style="width:86%"></i></span></div>
+          <div class="scan-overlay overlay-c"><strong>Leads</strong><span><i style="width:58%"></i></span></div>
         </div>
-
-        <div class="live-feed" id="liveFeed"></div>
       </section>
     </main>
   </div>
