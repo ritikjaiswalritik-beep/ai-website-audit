@@ -61,20 +61,10 @@ button {
 button:hover { background: var(--accent-dark); transform: translateY(-1px); }
 .trust-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 26px; }
 .trust-row span { border: 1px solid var(--border); border-radius: 999px; padding: 8px 13px; color: var(--muted); font-size: 13px; font-weight: 700; background: var(--soft); }
-.analysis-panel {
-  margin: 0 auto 80px; padding: 30px; border: 1px solid var(--border); border-radius: 28px; box-shadow: var(--shadow); background: white;
-}
-.panel-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; }
-.panel-top h2 { margin: 0; font-size: clamp(26px, 4vw, 40px); letter-spacing: -0.04em; }
 #progressNumber { font-size: 34px; color: var(--accent); }
 .progress-track { height: 10px; border-radius: 999px; background: #eef2ff; overflow: hidden; margin: 24px 0; }
 .progress-bar { height: 100%; width: 0%; border-radius: inherit; background: linear-gradient(90deg, var(--accent), #60a5fa); transition: width .4s ease; }
 .scan-message { color: var(--muted); font-size: 17px; margin: 0 0 24px; }
-.scan-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-.scan-card { padding: 18px; border: 1px solid var(--border); border-radius: 18px; background: var(--soft); }
-.scan-card span { color: var(--accent); font-weight: 900; font-size: 12px; }
-.scan-card strong { display: block; margin: 10px 0 7px; }
-.scan-card p { color: var(--muted); margin: 0; font-size: 14px; line-height: 1.55; }
 .section, .faq { padding: 78px 0; border-top: 1px solid var(--border); }
 .section-heading { max-width: 660px; }
 h2 { font-size: clamp(30px, 4vw, 48px); line-height: 1.06; letter-spacing: -0.045em; margin: 0; }
@@ -108,8 +98,6 @@ footer { color: var(--muted); border-top: 1px solid var(--border); padding: 28px
   .hero { padding-top: 62px; }
   .audit-form { grid-template-columns: 1fr; }
   .audit-form button { min-height: 54px; }
-  .scan-grid, .feature-grid, .report-preview { grid-template-columns: 1fr; }
-  .panel-top { align-items: center; }
 }
 .analysis-body { background: #fbfdff; min-height: 100vh; }
 .analysis-page { width: min(1060px, calc(100% - 32px)); margin: 0 auto; }
@@ -199,10 +187,6 @@ button { border-radius: 3px; background: var(--accent); }
 .trust-row span { border-radius: 4px; background: #fff; }
 .hero-visual-card { position: relative; z-index: 1; min-height: 560px; border-radius: 6px; background: linear-gradient(145deg, #f7f6f1, #ece9df); border: 1px solid var(--border); overflow: hidden; box-shadow: var(--shadow); }
 .hero-visual-card::after { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 76% 18%, rgba(255,77,0,.16), transparent 26%); }
-.visual-person { position: absolute; inset: 80px 58px 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; }
-.person-head { width: 118px; height: 118px; border-radius: 50%; background: linear-gradient(145deg, #d9a67e, #ad744f); box-shadow: inset -20px -16px 0 rgba(0,0,0,.08); }
-.person-body { width: 285px; height: 265px; margin-top: -10px; border-radius: 110px 110px 0 0; background: linear-gradient(145deg, #111, #343434); position: relative; }
-.person-body::before { content: ''; position: absolute; left: 50%; top: 0; transform: translateX(-50%); width: 68px; height: 95px; background: #fff; clip-path: polygon(0 0,100% 0,80% 100%,20% 100%); }
 .floating-panel { position: absolute; z-index: 2; background: rgba(255,255,255,.92); border: 1px solid rgba(233,231,225,.9); box-shadow: 0 18px 50px rgba(10,10,10,.13); backdrop-filter: blur(12px); border-radius: 5px; padding: 15px; color: var(--text); }
 .main-panel { left: 28px; top: 38px; width: 190px; }
 .panel-one { right: 26px; top: 128px; width: 180px; }
@@ -242,7 +226,7 @@ button { border-radius: 3px; background: var(--accent); }
 @media (max-width: 640px) {
   .hero-split { padding-top: 42px; }
   .hero-visual-card { min-height: 380px; }
-  .floating-panel { transform: scale(.88); transform-origin: center; }
+  .model-badge, .floating-panel { transform: scale(.88); transform-origin: center; }
   .panel-one { right: 0; }
   .panel-two { left: 4px; }
   .nav-cta { display: none; }
