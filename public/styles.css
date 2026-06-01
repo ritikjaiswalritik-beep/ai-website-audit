@@ -426,3 +426,34 @@ input:focus { border-color: #e9a5b0; box-shadow: 0 0 0 4px #fff1f3; }
 }
 .text-logo .logo-red { color: var(--accent); }
 .text-logo .logo-black { color: #0a0a0a; }
+/* Locked-design polish: sharper copy accents and CTA feel */
+.hero-split h1 {
+  text-wrap: balance;
+}
+.hero-copy {
+  color: #353535;
+}
+.text-logo .logo-red {
+  background: linear-gradient(90deg, var(--accent), #e04b5d);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.audit-form button,
+.nav-cta {
+  box-shadow: 0 14px 34px rgba(177, 18, 38, .16);
+}
+.trust-row span:first-child,
+.trust-row span:nth-child(2) {
+  border-color: #e9a5b0;
+  color: var(--accent);
+}
+.hero-audit-card {
+  background: linear-gradient(135deg, #0a0a0a, #1d070b);
+}
+.score-line strong {
+  color: var(--accent);
+}
+.scan-message.big {
+  text-wrap: balance;
+}

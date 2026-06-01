@@ -29,16 +29,16 @@ targetUrl.textContent = cleanWebsite;
 leadWebsite.value = cleanWebsite;
 
 const steps = [
-  ['GPT-style reasoning layer', 'Reading your website like a buyer and finding unclear messaging that can reduce trust.'],
-  ['Claude-style clarity review', 'Checking if your offer, sections, and copy are simple enough for visitors to understand fast.'],
-  ['Gemini-style discovery scan', 'Looking for SEO opportunities, missing page signals, and modern search visibility gaps.'],
-  ['Perplexity-style citation check', 'Testing if your content looks credible enough to be quoted by AI answer engines.'],
-  ['ChatGPT 2026 intent mapping', 'Matching your website pages with user search intent and lead-generation potential.'],
-  ['AI Overview readiness', 'Checking headings, snippets, and answer-friendly content structure.'],
-  ['GEO / AEO visibility engine', 'Reviewing if AI search systems can extract your expertise, services, and location clearly.'],
-  ['Mobile buyer journey analysis', 'Finding friction points that can make phone users leave before contacting you.'],
-  ['Conversion leak detector', 'Reviewing CTAs, trust signals, contact flow, and report-worthy growth blockers.'],
-  ['Final growth report builder', 'Prioritizing the most valuable fixes for traffic, leads, and AI visibility.']
+  ['GPT-style strategy scan', 'Reading your website like a customer and finding the message gaps that reduce trust.'],
+  ['Claude-style clarity review', 'Checking whether your offer, services, and page sections are instantly clear.'],
+  ['Gemini-style discovery scan', 'Finding SEO opportunities, missing search signals, and visibility blockers.'],
+  ['Perplexity-style trust check', 'Testing whether your content looks credible enough for AI answers and citations.'],
+  ['Search intent mapping', 'Matching your pages with what buyers are actually searching for right now.'],
+  ['AI Overview readiness', 'Checking headings, snippets, and answer-friendly structure for modern search.'],
+  ['GEO / AEO visibility engine', 'Reviewing if AI systems can extract your expertise, services, and location clearly.'],
+  ['Mobile journey analysis', 'Finding phone-user friction that can stop visitors before they contact you.'],
+  ['Conversion leak detector', 'Reviewing CTAs, proof, trust signals, and form flow for lost lead opportunities.'],
+  ['Priority report builder', 'Ranking the highest-impact fixes for traffic, AI visibility, and more enquiries.']
 ];
 
 function addFeed(text) {
@@ -51,7 +51,7 @@ function addFeed(text) {
 
 let progress = 0;
 let index = 0;
-addFeed('Secure scan session created. No website changes will be made.');
+addFeed('Secure scan started. We only review public website signals — no changes are made.');
 
 const timer = setInterval(() => {
   progress += Math.floor(Math.random() * 4) + 2;
@@ -86,7 +86,7 @@ leadModal.addEventListener('click', (event) => {
 
 leadForm.addEventListener('submit', async (event) => {
   event.preventDefault();
-  formStatus.textContent = 'Sending your report request…';
+  formStatus.textContent = 'Preparing your report request…';
   const payload = Object.fromEntries(new FormData(leadForm).entries());
 
   try {
