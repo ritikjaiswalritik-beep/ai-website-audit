@@ -14,3 +14,8 @@ Rules:
 - Do not remove or replace the homepage image design unless admin explicitly says so.
 - Do not switch to old homepage orb-only design unless admin explicitly says "redesign" or asks for that exact version.
 - Future changes must stay inside this exact design.
+
+## Anti-fallback guard
+
+`npm run build` now runs `scripts/guard-design.js`.
+If old design classes/tokens are reintroduced, the build fails so old layouts cannot silently deploy again.

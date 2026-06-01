@@ -101,7 +101,7 @@ input:focus { border-color: #e9a5b0; box-shadow: 0 0 0 4px #fff1f3; }
   background: linear-gradient(180deg, #fff, #fff5f7);
   box-shadow: var(--shadow);
 }
-.clean-image-wrap {
+.homepage-image-wrap {
   aspect-ratio: 1 / 1;
   overflow: hidden;
   border: 1px solid var(--border);
