@@ -417,32 +417,3 @@ input:focus { border-color: #e9a5b0; box-shadow: 0 0 0 4px #fff1f3; }
   .model-chip-row { grid-template-columns: repeat(2, 1fr); }
   .hero-audit-card { grid-template-columns: 1fr; }
 }
-/* Simple red + white text logo */
-.brand {
-  gap: 11px;
-  font-weight: 900;
-  letter-spacing: -0.05em;
-  color: #0a0a0a;
-}
-.brand-mark {
-  width: 36px;
-  height: 36px;
-  border-radius: 8px;
-  background: #b11226 !important;
-  color: #fff !important;
-  box-shadow: none;
-  font-size: 0;
-  position: relative;
-}
-.brand-mark::before {
-  content: 'A';
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  color: #fff;
-  font-size: 17px;
-  font-weight: 900;
-  letter-spacing: -0.08em;
-}
-.brand-mark::after { display: none; }
