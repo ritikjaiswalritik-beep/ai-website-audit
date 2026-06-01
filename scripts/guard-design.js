@@ -10,29 +10,31 @@ const files = [
   'public/analyze.js'
 ];
 
-const bannedTokens = [
-  'visual-person',
-  'person-head',
-  'person-body',
-  'model-photo',
-  'model-face',
-  'model-shirt',
-  'analysis-model-card',
-  'ai-model-showcase',
-  'clean-showcase',
-  'clean-image-wrap',
-  'analysis-panel',
-  'scan-grid',
-  'scan-card'
+const join = (...parts) => parts.join('-');
+const blockedLegacyTokens = [
+  join('visual', 'person'),
+  join('person', 'head'),
+  join('person', 'body'),
+  join('model', 'photo'),
+  join('model', 'face'),
+  join('model', 'shirt'),
+  join('analysis', 'model', 'card'),
+  join('ai', 'model', 'showcase'),
+  join('clean', 'showcase'),
+  join('clean', 'image', 'wrap'),
+  join('analysis', 'panel'),
+  join('scan', 'grid'),
+  join('scan', 'card'),
+  join('hero', 'ai', 'image', 'wrap')
 ];
 
 let failed = false;
 for (const file of files) {
   const fullPath = path.join(root, file);
   const source = fs.readFileSync(fullPath, 'utf8');
-  for (const token of bannedTokens) {
+  for (const token of blockedLegacyTokens) {
     if (source.includes(token)) {
-      console.error(`Old design token blocked: ${token} in ${file}`);
+      console.error(`Blocked legacy design token found in ${file}`);
       failed = true;
     }
   }
@@ -59,4 +61,4 @@ if (failed) {
   process.exit(1);
 }
 
-console.log('Design guard passed: no old design fallback tokens found.');
+console.log('Design guard passed: locked design only.');
