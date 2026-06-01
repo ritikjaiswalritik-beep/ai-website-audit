@@ -54,6 +54,8 @@ function addAnalysisFeed(analysis) {
   if (analysis.issues?.[0]) addFeed(`Top issue: ${analysis.issues[0]}.`);
 }
 
+const MIN_SCAN_MS = 60000;
+const startedAt = Date.now();
 let progress = 0;
 let index = 0;
 let analysisReady = false;
@@ -85,9 +87,12 @@ function maybeOpenLeadForm() {
 }
 
 const timer = setInterval(() => {
-  progress += Math.floor(Math.random() * 5) + 4;
-  if (progress > 98 && !analysisReady && !analysisError) progress = 98;
-  if (progress > 100 || analysisReady) progress = 100;
+  const elapsed = Date.now() - startedAt;
+  const timeProgress = Math.min(98, Math.floor((elapsed / MIN_SCAN_MS) * 98));
+  const stepBoost = Math.floor(Math.random() * 2);
+  progress = Math.max(progress, Math.min(98, timeProgress + stepBoost));
+
+  if (analysisReady && elapsed >= MIN_SCAN_MS) progress = 100;
 
   const nextIndex = Math.min(steps.length - 1, Math.floor((progress / 100) * steps.length));
   if (nextIndex !== index || progress === 100) {
@@ -110,7 +115,7 @@ const timer = setInterval(() => {
     progressDone = true;
     maybeOpenLeadForm();
   }
-}, 1300);
+}, 1200);
 
 analysisRequest.then(() => maybeOpenLeadForm());
 
