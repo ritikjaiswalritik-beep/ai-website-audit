@@ -1,0 +1,19 @@
+{
+  "name": "ai-audit-website",
+  "version": "1.0.0",
+  "description": "Minimal professional AI website audit lead-generation site for Node.js hosting.",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node src/server.js",
+    "test": "node --check src/server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "helmet": "^7.1.0",
+    "nodemailer": "^8.0.10"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
