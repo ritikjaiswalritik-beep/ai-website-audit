@@ -46,24 +46,6 @@
         </div>
       </section>
 
-      <section class="analysis-panel hidden" id="analysisPanel" aria-live="polite">
-        <div class="panel-top">
-          <div>
-            <p class="small-label">Live analysis</p>
-            <h2 id="scanTitle">Scanning your website</h2>
-          </div>
-          <strong id="progressNumber">0%</strong>
-        </div>
-        <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
-        <p class="scan-message" id="scanMessage">Preparing AI-powered audit engine…</p>
-        <div class="scan-grid">
-          <div class="scan-card"><span>01</span><strong>SEO foundation</strong><p>Titles, structure, metadata, index signals.</p></div>
-          <div class="scan-card"><span>02</span><strong>AI visibility</strong><p>Content clarity for answer engines and AI summaries.</p></div>
-          <div class="scan-card"><span>03</span><strong>Speed signals</strong><p>Performance, mobile UX, and experience blockers.</p></div>
-          <div class="scan-card"><span>04</span><strong>Lead conversion</strong><p>CTA strength, trust elements, and page flow.</p></div>
-        </div>
-      </section>
-
       <section class="section" id="checks">
         <div class="section-heading">
           <p class="small-label">What we check</p>
@@ -102,24 +84,6 @@
     <footer>
       <p>© <span id="year"></span> AI Website Audit. Professional website growth analysis.</p>
     </footer>
-  </div>
-
-  <div class="modal hidden" id="leadModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <div class="modal-card">
-      <button class="modal-close" id="closeModal" type="button" aria-label="Close">×</button>
-      <p class="small-label">Report ready</p>
-      <h2 id="modalTitle">Where should we send your website audit?</h2>
-      <p class="modal-copy">Enter your details and we’ll share the complete report by email.</p>
-      <form id="leadForm" class="lead-form">
-        <input type="hidden" id="leadWebsite" name="website" />
-        <input name="name" type="text" placeholder="Your name" required />
-        <input name="email" type="email" placeholder="Email address" required />
-        <input name="phone" type="tel" placeholder="Phone / WhatsApp" required />
-        <input name="business" type="text" placeholder="Business type (optional)" />
-        <button type="submit">Send my report</button>
-      </form>
-      <p class="form-status" id="formStatus"></p>
-    </div>
   </div>
 
   <script src="/script.js"></script>
