@@ -417,3 +417,12 @@ input:focus { border-color: #e9a5b0; box-shadow: 0 0 0 4px #fff1f3; }
   .model-chip-row { grid-template-columns: repeat(2, 1fr); }
   .hero-audit-card { grid-template-columns: 1fr; }
 }
+/* Logo-only locked-design update */
+.text-logo {
+  gap: 0;
+  font-weight: 900;
+  font-size: 20px;
+  letter-spacing: -0.06em;
+}
+.text-logo .logo-red { color: var(--accent); }
+.text-logo .logo-black { color: #0a0a0a; }
