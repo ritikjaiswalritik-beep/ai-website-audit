@@ -1,7 +1,16 @@
 # AnalyzeMySite Design Lock
 
-Approved website version is exactly commit:
+Approved design is option 1:
 
-`62a26d1 - Restore previous homepage design`
+Crimson/black/white layout with AI orb and model badges:
+- ChatGPT
+- Claude
+- Gemini
+- Perplexity
 
-Do not change layout, colors, logo styling, copy style, hero, cards, loading page, or theme unless admin explicitly says: redesign.
+Base design restored from commit `a0d3346` with AnalyzeMySite branding.
+
+Rules:
+- Do not change the layout/theme/hero/design unless admin explicitly says "redesign".
+- Future changes must stay inside this exact design.
+- No uploaded hero image replacement unless explicitly requested.
